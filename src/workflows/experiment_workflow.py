@@ -22,6 +22,10 @@ from src.agents.material_agent import analyze_material_data
 from src.agents.scientist_agent import synthesize_agent_reports
 from src.core.message_bus import MessageBus
 from src.core.memory import save_experiment_memory
+from src.core.knowledge_graph import (
+    build_experiment_graph,
+    save_experiment_graph,
+)
 
 
 def run(config: dict) -> None:
@@ -107,3 +111,14 @@ def run(config: dict) -> None:
     )
 
     print(f"Saved experiment memory: {memory_path}")
+
+    graph = build_experiment_graph(
+        experiment_id=experiment_id,
+        material_report=material_report,
+        electrical_report=electrical_report,
+        scientist_report=scientist_report,
+    )
+
+    graph_path = save_experiment_graph(graph)
+
+    print(f"Saved knowledge graph: {graph_path}")

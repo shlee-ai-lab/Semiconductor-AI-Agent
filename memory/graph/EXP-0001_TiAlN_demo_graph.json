@@ -1,0 +1,95 @@
+{
+  "experiment_id": "EXP-0001_TiAlN_demo",
+  "nodes": [
+    {
+      "id": "EXP-0001_TiAlN_demo",
+      "type": "experiment"
+    },
+    {
+      "id": "material_metric:Al_Ti",
+      "type": "material_metric"
+    },
+    {
+      "id": "material_metric:C_Ti",
+      "type": "material_metric"
+    },
+    {
+      "id": "material_metric:N_Ti",
+      "type": "material_metric"
+    },
+    {
+      "id": "material_metric:O_Ti",
+      "type": "material_metric"
+    },
+    {
+      "id": "electrical_metric:Rs_ohm_sq",
+      "type": "electrical_metric"
+    },
+    {
+      "id": "electrical_metric:Work_Function_eV",
+      "type": "electrical_metric"
+    },
+    {
+      "id": "EXP-0001_TiAlN_demo:hypothesis:1",
+      "type": "hypothesis",
+      "text": "Sheet resistance variation may be related to carbon impurity incorporation."
+    },
+    {
+      "id": "EXP-0001_TiAlN_demo:hypothesis:2",
+      "type": "hypothesis",
+      "text": "Sheet resistance variation may be influenced by oxygen incorporation or interfacial oxidation."
+    },
+    {
+      "id": "EXP-0001_TiAlN_demo:hypothesis:3",
+      "type": "hypothesis",
+      "text": "Work function shift may be related to Al incorporation in TiAlN."
+    }
+  ],
+  "edges": [
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "material_metric:Al_Ti",
+      "relationship": "has_material_metric"
+    },
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "material_metric:C_Ti",
+      "relationship": "has_material_metric"
+    },
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "material_metric:N_Ti",
+      "relationship": "has_material_metric"
+    },
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "material_metric:O_Ti",
+      "relationship": "has_material_metric"
+    },
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "electrical_metric:Rs_ohm_sq",
+      "relationship": "has_electrical_metric"
+    },
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "electrical_metric:Work_Function_eV",
+      "relationship": "has_electrical_metric"
+    },
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "EXP-0001_TiAlN_demo:hypothesis:1",
+      "relationship": "generates_hypothesis"
+    },
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "EXP-0001_TiAlN_demo:hypothesis:2",
+      "relationship": "generates_hypothesis"
+    },
+    {
+      "source": "EXP-0001_TiAlN_demo",
+      "target": "EXP-0001_TiAlN_demo:hypothesis:3",
+      "relationship": "generates_hypothesis"
+    }
+  ]
+}
