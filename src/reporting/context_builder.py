@@ -40,6 +40,7 @@ def create_research_context(
     electrical_report: dict,
     material_report: dict,
     scientist_report: dict,
+    agent_messages: list[dict],
     knowledge_results: dict,
     figure_paths: list[str],
     output_path: str,
@@ -97,6 +98,19 @@ def create_research_context(
 
     _append_agent_summary(lines, electrical_report)
     _append_agent_summary(lines, material_report)
+
+    lines.append("## Agent Message Bus")
+    lines.append("")
+    if not agent_messages:
+        lines.append("- No agent messages generated.")
+    else:
+        for msg in agent_messages:
+            lines.append(f"- **{msg['sender']} → {msg['receiver']}**")
+            lines.append(f"  - Type: {msg['message_type']}")
+            lines.append(f"  - Content: {msg['content']}")
+            lines.append(f"  - Evidence: {msg['evidence']}")
+            lines.append(f"  - Time: {msg['created_at']}")
+    lines.append("")
 
     lines.append("## Scientist Agent Report")
     lines.append("")

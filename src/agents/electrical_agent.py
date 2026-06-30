@@ -1,5 +1,7 @@
 import pandas as pd
 
+from src.core.message_bus import MessageBus
+
 
 ELECTRICAL_COLUMNS = [
     "Rs_ohm_sq",
@@ -12,7 +14,7 @@ ELECTRICAL_COLUMNS = [
 ]
 
 
-def analyze_electrical_data(df: pd.DataFrame) -> dict:
+def analyze_electrical_data(df: pd.DataFrame, bus: MessageBus | None = None) -> dict:
     available_columns = [col for col in ELECTRICAL_COLUMNS if col in df.columns]
 
     if not available_columns:
@@ -38,22 +40,42 @@ def analyze_electrical_data(df: pd.DataFrame) -> dict:
     questions_for_other_agents = []
 
     if "Rs_ohm_sq" in available_columns:
-        questions_for_other_agents.append(
-            "Material Agent: Check whether composition or impurity changes explain sheet resistance variation."
-        )
-        questions_for_other_agents.append(
-            "Structure Agent: Check whether crystallinity, thickness, or interface quality explains sheet resistance variation."
-        )
+        question = "Check whether composition or impurity changes explain sheet resistance variation."
+        questions_for_other_agents.append(f"Material Agent: {question}")
+
+        if bus:
+            bus.send(
+                sender="Electrical Agent",
+                receiver="Material Agent",
+                message_type="question",
+                content=question,
+                evidence=["Rs_ohm_sq detected"],
+            )
+
+        question = "Check whether crystallinity, thickness, or interface quality explains sheet resistance variation."
+        questions_for_other_agents.append(f"Structure Agent: {question}")
+
+        if bus:
+            bus.send(
+                sender="Electrical Agent",
+                receiver="Structure Agent",
+                message_type="question",
+                content=question,
+                evidence=["Rs_ohm_sq detected"],
+            )
 
     if "Work_Function_eV" in available_columns:
-        questions_for_other_agents.append(
-            "Material Agent: Check whether Al incorporation or interface dipole can explain work function shift."
-        )
+        question = "Check whether Al incorporation or interface dipole can explain work function shift."
+        questions_for_other_agents.append(f"Material Agent: {question}")
 
-    if "Leakage_A_cm2" in available_columns:
-        questions_for_other_agents.append(
-            "Structure Agent: Check whether interface defects or film non-uniformity explain leakage behavior."
-        )
+        if bus:
+            bus.send(
+                sender="Electrical Agent",
+                receiver="Material Agent",
+                message_type="question",
+                content=question,
+                evidence=["Work_Function_eV detected"],
+            )
 
     return {
         "agent": "Electrical Agent",

@@ -20,11 +20,14 @@ from src.reporting.context_builder import (
 from src.agents.electrical_agent import analyze_electrical_data
 from src.agents.material_agent import analyze_material_data
 from src.agents.scientist_agent import synthesize_agent_reports
+from src.core.message_bus import MessageBus
 
 
 def run(config: dict) -> None:
     experiment_folder = Path(config["experiment"]["folder"])
     dataset_path = experiment_folder / "data" / "tialn_dataset.csv"
+
+    bus = MessageBus()
 
     df = load_dataset(dataset_path)
 
@@ -33,8 +36,8 @@ def run(config: dict) -> None:
     profile = profile_dataset(df)
     analysis_plan = create_analysis_plan(profile, correlations)
 
-    electrical_report = analyze_electrical_data(df)
-    material_report = analyze_material_data(df)
+    electrical_report = analyze_electrical_data(df, bus=bus)
+    material_report = analyze_material_data(df, bus=bus)
     scientist_report = synthesize_agent_reports(
         electrical_report=electrical_report,
         material_report=material_report,
@@ -71,6 +74,7 @@ def run(config: dict) -> None:
         electrical_report=electrical_report,
         material_report=material_report,
         scientist_report=scientist_report,
+        agent_messages=bus.get_messages(),
         knowledge_results=knowledge_results,
         figure_paths=figure_paths,
         output_path=str(context_path),
