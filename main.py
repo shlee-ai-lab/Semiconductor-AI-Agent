@@ -1,17 +1,17 @@
-from src.analyzer import (
+from src.analysis.analyzer import (
     load_dataset,
     summarize_dataset,
     calculate_correlations,
 )
-from src.plotter import create_scatter_plot
-from src.profiler import profile_dataset
-from src.planner import create_analysis_plan
-from src.knowledge import (
+from src.visualization.plotter import create_scatter_plot
+from src.profiling.profiler import profile_dataset
+from src.planning.planner import create_analysis_plan
+from src.knowledge.retrieval import (
     load_knowledge_base,
     extract_keywords_from_profile,
     search_knowledge,
 )
-from src.report import create_research_context, assemble_final_report
+from src.reporting.context_builder import create_research_context, assemble_final_report
 
 
 def main():
