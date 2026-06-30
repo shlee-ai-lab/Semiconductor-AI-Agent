@@ -1,0 +1,24 @@
+project:
+  name: "TiAlN gate metal for advanced GAA/CFET devices"
+  code: "TIALN"
+
+data:
+  dataset_path: "data/tialn_dataset.csv"
+
+outputs:
+  figure_dir: "outputs/figures"
+  report_dir: "outputs/reports"
+  context_report: "tialn_research_context.md"
+  final_report: "final_tialn_report.md"
+  ai_interpretation: "ai_interpretation.md"
+
+figures:
+  - x: "Al_Ti"
+    y: "Rs_ohm_sq"
+    filename: "al_ti_vs_rs.png"
+    title: "Al/Ti vs Sheet Resistance"
+
+  - x: "C_Ti"
+    y: "Rs_ohm_sq"
+    filename: "c_ti_vs_rs.png"
+    title: "C/Ti vs Sheet Resistance"

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from src.analysis.analyzer import (
     load_dataset,
     summarize_dataset,
@@ -15,15 +17,18 @@ from src.reporting.context_builder import (
     create_research_context,
     assemble_final_report,
 )
+from src.core.config import load_config
 
 
 def run_experiment_workflow() -> None:
+    config = load_config()
+
     print("=" * 60)
     print("SERA v1.0 Alpha")
-    print("Experiment Workflow Orchestrator")
+    print("Configurable Experiment Workflow")
     print("=" * 60)
 
-    dataset_path = "data/tialn_dataset.csv"
+    dataset_path = config["data"]["dataset_path"]
 
     df = load_dataset(dataset_path)
 
@@ -36,28 +41,24 @@ def run_experiment_workflow() -> None:
     keywords = extract_keywords_from_profile(profile)
     knowledge_results = search_knowledge(knowledge_base, keywords)
 
-    figure_paths = [
-        "outputs/figures/al_ti_vs_rs.png",
-        "outputs/figures/c_ti_vs_rs.png",
-    ]
+    figure_dir = Path(config["outputs"]["figure_dir"])
+    report_dir = Path(config["outputs"]["report_dir"])
 
-    create_scatter_plot(
-        df=df,
-        x_col="Al_Ti",
-        y_col="Rs_ohm_sq",
-        output_path=figure_paths[0],
-        title="Al/Ti vs Sheet Resistance",
-    )
+    figure_paths = []
 
-    create_scatter_plot(
-        df=df,
-        x_col="C_Ti",
-        y_col="Rs_ohm_sq",
-        output_path=figure_paths[1],
-        title="C/Ti vs Sheet Resistance",
-    )
+    for fig in config["figures"]:
+        output_path = figure_dir / fig["filename"]
+        figure_paths.append(str(output_path))
 
-    context_path = "outputs/reports/tialn_research_context.md"
+        create_scatter_plot(
+            df=df,
+            x_col=fig["x"],
+            y_col=fig["y"],
+            output_path=str(output_path),
+            title=fig["title"],
+        )
+
+    context_path = report_dir / config["outputs"]["context_report"]
 
     create_research_context(
         summary=summary,
@@ -66,18 +67,18 @@ def run_experiment_workflow() -> None:
         analysis_plan=analysis_plan,
         knowledge_results=knowledge_results,
         figure_paths=figure_paths,
-        output_path=context_path,
+        output_path=str(context_path),
     )
 
     print(f"Saved research context: {context_path}")
 
-    ai_interpretation_path = "outputs/reports/ai_interpretation.md"
-    final_report_path = "outputs/reports/final_tialn_report.md"
+    ai_interpretation_path = report_dir / config["outputs"]["ai_interpretation"]
+    final_report_path = report_dir / config["outputs"]["final_report"]
 
     assemble_final_report(
-        context_path=context_path,
-        ai_interpretation_path=ai_interpretation_path,
-        output_path=final_report_path,
+        context_path=str(context_path),
+        ai_interpretation_path=str(ai_interpretation_path),
+        output_path=str(final_report_path),
     )
 
     print(f"Saved final report: {final_report_path}")

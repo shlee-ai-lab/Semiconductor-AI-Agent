@@ -221,8 +221,8 @@ TiAlN, interpretation, gate metal, work function, sheet resistance, best practic
 
 ## 7. Generated Figures
 
-- Figure 1: `outputs/figures/al_ti_vs_rs.png`
-- Figure 2: `outputs/figures/c_ti_vs_rs.png`
+- Figure 1: `outputs\figures\al_ti_vs_rs.png`
+- Figure 2: `outputs\figures\c_ti_vs_rs.png`
 
 ## 8. Requested AI Output
 
