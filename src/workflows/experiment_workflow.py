@@ -21,6 +21,7 @@ from src.agents.electrical_agent import analyze_electrical_data
 from src.agents.material_agent import analyze_material_data
 from src.agents.scientist_agent import synthesize_agent_reports
 from src.core.message_bus import MessageBus
+from src.core.memory import save_experiment_memory
 
 
 def run(config: dict) -> None:
@@ -92,3 +93,17 @@ def run(config: dict) -> None:
     )
 
     print(f"Saved final report: {final_report_path}")
+
+    experiment_id = experiment_folder.name
+    project_name = config["project"]["name"]
+
+    memory_path = save_experiment_memory(
+        experiment_id=experiment_id,
+        project_name=project_name,
+        summary=summary,
+        electrical_report=electrical_report,
+        material_report=material_report,
+        scientist_report=scientist_report,
+    )
+
+    print(f"Saved experiment memory: {memory_path}")
