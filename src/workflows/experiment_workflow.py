@@ -18,6 +18,8 @@ from src.reporting.context_builder import (
     assemble_final_report,
 )
 from src.agents.electrical_agent import analyze_electrical_data
+from src.agents.material_agent import analyze_material_data
+from src.agents.scientist_agent import synthesize_agent_reports
 
 
 def run(config: dict) -> None:
@@ -30,7 +32,13 @@ def run(config: dict) -> None:
     correlations = calculate_correlations(df)
     profile = profile_dataset(df)
     analysis_plan = create_analysis_plan(profile, correlations)
+
     electrical_report = analyze_electrical_data(df)
+    material_report = analyze_material_data(df)
+    scientist_report = synthesize_agent_reports(
+        electrical_report=electrical_report,
+        material_report=material_report,
+    )
 
     knowledge_base = load_knowledge_base()
     keywords = extract_keywords_from_profile(profile)
@@ -61,6 +69,8 @@ def run(config: dict) -> None:
         profile=profile,
         analysis_plan=analysis_plan,
         electrical_report=electrical_report,
+        material_report=material_report,
+        scientist_report=scientist_report,
         knowledge_results=knowledge_results,
         figure_paths=figure_paths,
         output_path=str(context_path),

@@ -1,12 +1,45 @@
 from pathlib import Path
 
 
+def _append_agent_summary(lines: list[str], report: dict) -> None:
+    lines.append(f"## {report['agent']} Report")
+    lines.append("")
+    lines.append(f"- **Status**: {report['status']}")
+    lines.append(f"- **Available columns**: {report.get('available_columns', [])}")
+    lines.append("")
+
+    if report.get("summary"):
+        lines.append("### Summary")
+        lines.append("")
+        for col, stats in report["summary"].items():
+            lines.append(f"- **{col}**")
+            for key, value in stats.items():
+                lines.append(f"  - {key}: {value}")
+        lines.append("")
+
+    if report.get("key_findings"):
+        lines.append("### Key Findings")
+        lines.append("")
+        for item in report["key_findings"]:
+            lines.append(f"- {item}")
+        lines.append("")
+
+    if report.get("questions_for_other_agents"):
+        lines.append("### Questions for Other Agents")
+        lines.append("")
+        for item in report["questions_for_other_agents"]:
+            lines.append(f"- {item}")
+        lines.append("")
+
+
 def create_research_context(
     summary: dict,
     correlations: dict,
     profile: dict,
     analysis_plan: dict,
     electrical_report: dict,
+    material_report: dict,
+    scientist_report: dict,
     knowledge_results: dict,
     figure_paths: list[str],
     output_path: str,
@@ -57,27 +90,34 @@ def create_research_context(
             lines.append(f"    - {method}")
     lines.append("")
 
-    lines.append("## 6. Electrical Agent Report")
+    lines.append("---")
     lines.append("")
-    lines.append(f"- **Status**: {electrical_report['status']}")
-    lines.append(f"- **Available electrical columns**: {electrical_report['available_columns']}")
-    lines.append("")
-
-    lines.append("### Electrical Summary")
-    lines.append("")
-    for col, stats in electrical_report["summary"].items():
-        lines.append(f"- **{col}**")
-        for key, value in stats.items():
-            lines.append(f"  - {key}: {value}")
+    lines.append("# Multi-Agent Analysis")
     lines.append("")
 
-    lines.append("### Questions for Other Agents")
+    _append_agent_summary(lines, electrical_report)
+    _append_agent_summary(lines, material_report)
+
+    lines.append("## Scientist Agent Report")
     lines.append("")
-    for question in electrical_report["questions_for_other_agents"]:
-        lines.append(f"- {question}")
+    lines.append(f"- **Status**: {scientist_report['status']}")
     lines.append("")
 
-    lines.append("## 7. Relevant Knowledge")
+    lines.append("### Cross-Agent Hypotheses")
+    lines.append("")
+    for item in scientist_report["hypotheses"]:
+        lines.append(f"- {item}")
+    lines.append("")
+
+    lines.append("### Cross-Agent Questions")
+    lines.append("")
+    for item in scientist_report["cross_agent_questions"]:
+        lines.append(f"- {item}")
+    lines.append("")
+
+    lines.append("---")
+    lines.append("")
+    lines.append("## Relevant Knowledge")
     lines.append("")
     for category, records in knowledge_results.items():
         lines.append(f"### {category}")
@@ -96,23 +136,26 @@ def create_research_context(
             lines.append(record["content"])
             lines.append("")
 
-    lines.append("## 8. Generated Figures")
+    lines.append("## Generated Figures")
     lines.append("")
     for i, path in enumerate(figure_paths, start=1):
         lines.append(f"- Figure {i}: `{path}`")
     lines.append("")
 
-    lines.append("## 9. Requested AI Output")
+    lines.append("## Requested AI Output")
     lines.append("")
     lines.append("Please write the following sections in Korean technical research style:")
     lines.append("")
     lines.append("1. Results summary")
     lines.append("2. Discussion")
     lines.append("3. Possible mechanism")
-    lines.append("4. How the current result relates to the retrieved knowledge")
-    lines.append("5. Limitations of the current dataset")
-    lines.append("6. Recommended next experiments")
-    lines.append("7. One-slide PPT message")
+    lines.append("4. Cross-agent interpretation")
+    lines.append("5. How the current result relates to the retrieved knowledge")
+    lines.append("6. Limitations of the current dataset")
+    lines.append("7. Recommended next experiments")
+    lines.append("8. One-slide PPT message")
+    lines.append("")
+    lines.append("Important rule: Do not invent missing data. Clearly separate observation, interpretation, and hypothesis.")
     lines.append("")
 
     Path(output_path).write_text("\n".join(lines), encoding="utf-8")

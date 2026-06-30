@@ -78,12 +78,16 @@ Research Goal:
     - Assess whether carbon impurity increases resistance.
     - Connect precursor chemistry to electrical degradation.
 
-## 6. Electrical Agent Report
+---
+
+# Multi-Agent Analysis
+
+## Electrical Agent Report
 
 - **Status**: Electrical data analyzed
-- **Available electrical columns**: ['Rs_ohm_sq', 'Work_Function_eV']
+- **Available columns**: ['Rs_ohm_sq', 'Work_Function_eV']
 
-### Electrical Summary
+### Summary
 
 - **Rs_ohm_sq**
   - mean: 253.3333
@@ -102,7 +106,58 @@ Research Goal:
 - Structure Agent: Check whether crystallinity, thickness, or interface quality explains sheet resistance variation.
 - Material Agent: Check whether Al incorporation or interface dipole can explain work function shift.
 
-## 7. Relevant Knowledge
+## Material Agent Report
+
+- **Status**: Material composition data analyzed
+- **Available columns**: ['Al_Ti', 'C_Ti', 'N_Ti', 'O_Ti']
+
+### Summary
+
+- **Al_Ti**
+  - mean: 0.2467
+  - min: 0.06
+  - max: 0.47
+  - std: 0.2074
+- **C_Ti**
+  - mean: 0.2033
+  - min: 0.07
+  - max: 0.33
+  - std: 0.1301
+- **N_Ti**
+  - mean: 1.0367
+  - min: 0.94
+  - max: 1.21
+  - std: 0.1504
+- **O_Ti**
+  - mean: 0.0767
+  - min: 0.05
+  - max: 0.1
+  - std: 0.0252
+
+### Key Findings
+
+- Al/Ti ratio is available and can be used to evaluate Al incorporation effect.
+- C/Ti ratio is available and should be checked as a possible impurity-related factor.
+- O/Ti ratio is available and may indicate oxidation or interfacial reaction.
+
+## Scientist Agent Report
+
+- **Status**: Cross-agent synthesis completed
+
+### Cross-Agent Hypotheses
+
+- Sheet resistance variation may be related to carbon impurity incorporation.
+- Sheet resistance variation may be influenced by oxygen incorporation or interfacial oxidation.
+- Work function shift may be related to Al incorporation in TiAlN.
+
+### Cross-Agent Questions
+
+- Does increasing Al/Ti improve work-function tuning while degrading or improving sheet resistance?
+- Are impurity trends consistent with the observed electrical behavior?
+
+---
+
+## Relevant Knowledge
 
 ### literature
 
@@ -243,22 +298,25 @@ TiAlN, interpretation, gate metal, work function, sheet resistance, best practic
 
 - No relevant knowledge found.
 
-## 8. Generated Figures
+## Generated Figures
 
 - Figure 1: `outputs\figures\al_ti_vs_rs.png`
 - Figure 2: `outputs\figures\c_ti_vs_rs.png`
 
-## 9. Requested AI Output
+## Requested AI Output
 
 Please write the following sections in Korean technical research style:
 
 1. Results summary
 2. Discussion
 3. Possible mechanism
-4. How the current result relates to the retrieved knowledge
-5. Limitations of the current dataset
-6. Recommended next experiments
-7. One-slide PPT message
+4. Cross-agent interpretation
+5. How the current result relates to the retrieved knowledge
+6. Limitations of the current dataset
+7. Recommended next experiments
+8. One-slide PPT message
+
+Important rule: Do not invent missing data. Clearly separate observation, interpretation, and hypothesis.
 
 
 ---
