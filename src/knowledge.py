@@ -26,6 +26,9 @@ def load_knowledge_base(base_path: str = "knowledge") -> dict:
         "literature": load_markdown_files(f"{base_path}/literature"),
         "experiments": load_markdown_files(f"{base_path}/experiments"),
         "mechanisms": load_markdown_files(f"{base_path}/mechanisms"),
+        "failure_cases": load_markdown_files(f"{base_path}/failure_cases"),
+        "best_practices": load_markdown_files(f"{base_path}/best_practices"),
+        "writing_templates": load_markdown_files(f"{base_path}/writing_templates"),
     }
 
 

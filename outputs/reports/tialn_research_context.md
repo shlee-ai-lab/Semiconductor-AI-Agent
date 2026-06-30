@@ -82,7 +82,40 @@ Research Goal:
 
 ### experiments
 
-- No relevant knowledge found.
+#### EXP-0001_TiAlN_Supercycle.md
+- Path: `knowledge\experiments\EXP-0001_TiAlN_Supercycle.md`
+- Match Score: 10
+
+# EXP-0001
+
+## Title
+TiAlN supercycle ratio split experiment
+
+## Project
+TiAlN gate metal for advanced GAA/CFET devices
+
+## Experiment Summary
+TiAlN films were prepared using different TiN:AlN supercycle ratios to investigate the relationship between Al incorporation, impurity level, and sheet resistance.
+
+## Key Variables
+- TiN:AlN supercycle ratio
+- Al/Ti ratio
+- C/Ti ratio
+- O/Ti ratio
+- Sheet resistance
+
+## Key Observation
+Al incorporation changed the electrical properties of TiAlN. Carbon and oxygen impurities should be considered when interpreting sheet resistance trends.
+
+## Related Metrics
+- Al_Ti
+- C_Ti
+- O_Ti
+- Rs_ohm_sq
+- Work_Function_eV
+
+## Tags
+TiAlN, supercycle, XPS, sheet resistance, impurity, gate metal
 
 ### mechanisms
 
@@ -110,6 +143,77 @@ Al incorporation can reduce effective work function, which may be beneficial for
 - XPS depth profiling
 - UPS work function measurement
 - HfO2/TiAlN MOSCAP C-V analysis
+
+### failure_cases
+
+#### FAIL-0001_TiAlN_Impurity_Rs.md
+- Path: `knowledge\failure_cases\FAIL-0001_TiAlN_Impurity_Rs.md`
+- Match Score: 8
+
+# FAIL-0001
+
+## Title
+Possible sheet resistance degradation due to impurity incorporation in TiAlN
+
+## Problem
+TiAlN films may show increased sheet resistance when impurity incorporation becomes significant.
+
+## Possible Causes
+- Excess Al precursor exposure
+- Carbon incorporation from metal-organic precursor
+- Oxygen incorporation during or after deposition
+- Interfacial reaction with HfO2 or SiO2
+- Degraded crystallinity
+
+## Warning Signs
+- High C/Ti ratio
+- High O/Ti ratio
+- Increased Rs
+- Poor reproducibility
+- Strong substrate dependence
+
+## Suggested Checks
+- XPS composition and chemical state
+- SIMS depth profile
+- GIXRD crystallinity
+- TEM interface analysis
+- Repeat deposition for reproducibility
+
+## Tags
+TiAlN, impurity, carbon, oxygen, sheet resistance, failure case
+
+### best_practices
+
+#### BP-0001_TiAlN_Data_Interpretation.md
+- Path: `knowledge\best_practices\BP-0001_TiAlN_Data_Interpretation.md`
+- Match Score: 8
+
+# BP-0001
+
+## Title
+Best practice for interpreting TiAlN gate metal data
+
+## Guideline
+TiAlN gate metal data should not be interpreted from a single metric. Composition, impurity, crystallinity, interface quality, and electrical properties should be interpreted together.
+
+## Recommended Interpretation Flow
+1. Confirm film thickness and uniformity.
+2. Check Al/Ti ratio.
+3. Check C/Ti and O/Ti impurity ratios.
+4. Compare sheet resistance.
+5. Compare work function or flat-band voltage.
+6. Examine crystallinity by GIXRD.
+7. Check interface quality by TEM or XPS depth profile.
+
+## Important Caution
+A lower work function is not always beneficial if sheet resistance or interface quality is significantly degraded.
+
+## Tags
+TiAlN, interpretation, gate metal, work function, sheet resistance, best practice
+
+### writing_templates
+
+- No relevant knowledge found.
 
 ## 7. Generated Figures
 
