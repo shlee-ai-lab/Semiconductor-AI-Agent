@@ -26,3 +26,23 @@ def summarize_dataset(df: pd.DataFrame) -> dict:
         summary["average_work_function_eV"] = round(df["Work_Function_eV"].mean(), 2)
 
     return summary
+
+
+def calculate_correlations(df: pd.DataFrame) -> dict:
+    target = "Rs_ohm_sq"
+    variables = ["Al_Ti", "C_Ti", "N_Ti", "O_Ti"]
+
+    correlations = {}
+
+    for var in variables:
+        if var in df.columns and target in df.columns:
+            correlations[f"{var}_vs_{target}"] = round(df[var].corr(df[target]), 3)
+
+    if "Work_Function_eV" in df.columns:
+        for var in variables:
+            if var in df.columns:
+                correlations[f"{var}_vs_Work_Function_eV"] = round(
+                    df[var].corr(df["Work_Function_eV"]), 3
+                )
+
+    return correlations
