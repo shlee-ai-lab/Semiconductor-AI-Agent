@@ -1,8 +1,8 @@
-from src.core.orchestrator import run_experiment_workflow
+from src.core.orchestrator import run
 
 
 def main():
-    run_experiment_workflow()
+    run()
 
 
 if __name__ == "__main__":
