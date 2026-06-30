@@ -1,14 +1,19 @@
-import pandas as pd
+from src.analyzer import load_dataset, summarize_dataset
 
-print("=" * 50)
-print("Semiconductor AI Agent v0.1")
-print("=" * 50)
 
-# CSV 읽기
-df = pd.read_csv("data/tialn_dataset.csv")
+def main():
+    print("=" * 60)
+    print("SERA v0.2")
+    print("Semiconductor Experiment Analyzer")
+    print("=" * 60)
 
-print("\n데이터를 성공적으로 읽었습니다.\n")
+    df = load_dataset("data/tialn_dataset.csv")
+    summary = summarize_dataset(df)
 
-print(df)
+    print("\n[Experiment Summary]\n")
+    for key, value in summary.items():
+        print(f"{key}: {value}")
 
-print("\n총 Sample 개수 :", len(df))
+
+if __name__ == "__main__":
+    main()
