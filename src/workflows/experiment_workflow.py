@@ -17,12 +17,12 @@ from src.reporting.context_builder import (
     create_research_context,
     assemble_final_report,
 )
+from src.agents.electrical_agent import analyze_electrical_data
 
 
 def run(config: dict) -> None:
     experiment_folder = Path(config["experiment"]["folder"])
     dataset_path = experiment_folder / "data" / "tialn_dataset.csv"
-    
 
     df = load_dataset(dataset_path)
 
@@ -30,6 +30,7 @@ def run(config: dict) -> None:
     correlations = calculate_correlations(df)
     profile = profile_dataset(df)
     analysis_plan = create_analysis_plan(profile, correlations)
+    electrical_report = analyze_electrical_data(df)
 
     knowledge_base = load_knowledge_base()
     keywords = extract_keywords_from_profile(profile)
@@ -59,6 +60,7 @@ def run(config: dict) -> None:
         correlations=correlations,
         profile=profile,
         analysis_plan=analysis_plan,
+        electrical_report=electrical_report,
         knowledge_results=knowledge_results,
         figure_paths=figure_paths,
         output_path=str(context_path),

@@ -74,7 +74,31 @@ Research Goal:
     - Assess whether carbon impurity increases resistance.
     - Connect precursor chemistry to electrical degradation.
 
-## 6. Relevant Knowledge
+## 6. Electrical Agent Report
+
+- **Status**: Electrical data analyzed
+- **Available electrical columns**: ['Rs_ohm_sq', 'Work_Function_eV']
+
+### Electrical Summary
+
+- **Rs_ohm_sq**
+  - mean: 253.3333
+  - min: 190
+  - max: 320
+  - std: 65.0641
+- **Work_Function_eV**
+  - mean: 4.55
+  - min: 4.45
+  - max: 4.65
+  - std: 0.1
+
+### Questions for Other Agents
+
+- Material Agent: Check whether composition or impurity changes explain sheet resistance variation.
+- Structure Agent: Check whether crystallinity, thickness, or interface quality explains sheet resistance variation.
+- Material Agent: Check whether Al incorporation or interface dipole can explain work function shift.
+
+## 7. Relevant Knowledge
 
 ### literature
 
@@ -215,12 +239,12 @@ TiAlN, interpretation, gate metal, work function, sheet resistance, best practic
 
 - No relevant knowledge found.
 
-## 7. Generated Figures
+## 8. Generated Figures
 
 - Figure 1: `outputs\figures\al_ti_vs_rs.png`
 - Figure 2: `outputs\figures\c_ti_vs_rs.png`
 
-## 8. Requested AI Output
+## 9. Requested AI Output
 
 Please write the following sections in Korean technical research style:
 

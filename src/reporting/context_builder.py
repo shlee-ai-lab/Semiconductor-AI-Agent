@@ -6,6 +6,7 @@ def create_research_context(
     correlations: dict,
     profile: dict,
     analysis_plan: dict,
+    electrical_report: dict,
     knowledge_results: dict,
     figure_paths: list[str],
     output_path: str,
@@ -56,7 +57,27 @@ def create_research_context(
             lines.append(f"    - {method}")
     lines.append("")
 
-    lines.append("## 6. Relevant Knowledge")
+    lines.append("## 6. Electrical Agent Report")
+    lines.append("")
+    lines.append(f"- **Status**: {electrical_report['status']}")
+    lines.append(f"- **Available electrical columns**: {electrical_report['available_columns']}")
+    lines.append("")
+
+    lines.append("### Electrical Summary")
+    lines.append("")
+    for col, stats in electrical_report["summary"].items():
+        lines.append(f"- **{col}**")
+        for key, value in stats.items():
+            lines.append(f"  - {key}: {value}")
+    lines.append("")
+
+    lines.append("### Questions for Other Agents")
+    lines.append("")
+    for question in electrical_report["questions_for_other_agents"]:
+        lines.append(f"- {question}")
+    lines.append("")
+
+    lines.append("## 7. Relevant Knowledge")
     lines.append("")
     for category, records in knowledge_results.items():
         lines.append(f"### {category}")
@@ -75,13 +96,13 @@ def create_research_context(
             lines.append(record["content"])
             lines.append("")
 
-    lines.append("## 7. Generated Figures")
+    lines.append("## 8. Generated Figures")
     lines.append("")
     for i, path in enumerate(figure_paths, start=1):
         lines.append(f"- Figure {i}: `{path}`")
     lines.append("")
 
-    lines.append("## 8. Requested AI Output")
+    lines.append("## 9. Requested AI Output")
     lines.append("")
     lines.append("Please write the following sections in Korean technical research style:")
     lines.append("")
