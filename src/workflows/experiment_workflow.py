@@ -20,7 +20,9 @@ from src.reporting.context_builder import (
 
 
 def run(config: dict) -> None:
-    dataset_path = config["data"]["dataset_path"]
+    experiment_folder = Path(config["experiment"]["folder"])
+    dataset_path = experiment_folder / "data" / "tialn_dataset.csv"
+    
 
     df = load_dataset(dataset_path)
 

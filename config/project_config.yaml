@@ -2,8 +2,11 @@ project:
   name: "TiAlN gate metal for advanced GAA/CFET devices"
   code: "TIALN"
 
-data:
-  dataset_path: "data/tialn_dataset.csv"
+workflow:
+  type: "experiment"
+
+experiment:
+  folder: "experiments/EXP-0001_TiAlN_demo"
 
 outputs:
   figure_dir: "outputs/figures"

@@ -1,0 +1,18 @@
+experiment:
+  id: "EXP-0001"
+  title: "TiAlN supercycle gate metal demo"
+  project: "TiAlN gate metal for advanced GAA/CFET devices"
+  goal: "Analyze relationship between TiAlN composition and electrical properties"
+  material: "TiAlN"
+  device_context: "GAA/CFET gate metal"
+
+data:
+  main_dataset: "data/tialn_dataset.csv"
+
+analysis:
+  target_property: "Rs_ohm_sq"
+  key_variables:
+    - "Al_Ti"
+    - "C_Ti"
+    - "O_Ti"
+    - "N_Ti"

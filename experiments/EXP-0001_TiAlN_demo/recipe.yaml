@@ -1,0 +1,8 @@
+recipe:
+  process_type: "ALD"
+  material: "TiAlN"
+  substrate: "SiO2 / HfO2 / Si"
+  ti_precursor: "TiCl4 or TDMATi"
+  al_precursor: "TMA"
+  nitrogen_reactant: "NH3"
+  split_variable: "TiN:AlN supercycle ratio"
